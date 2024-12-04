@@ -13,13 +13,12 @@ function emptyFieldValidation(message){
 }
 
 
-function emailValidation(){
-    let email = prompt("Ingrese su correo electrónico");
-
-    while(Users.includes(email)){
+function emailValidation(email){
+    let email = prompt(email)
+    while(Users.some(user => user.email === email)){
         alert("El correo ingresado ya se encuentra registrado, por favor usa otro correo")
         email = prompt("Ingrese un correo electrónico diferente")
-    }
+    } 
 
     return email
 }
@@ -42,7 +41,7 @@ function singIn(){
     let firstName = emptyFieldValidation("Ingrese su nombre");
     let lastName = emptyFieldValidation("Ingrese su apellido");
     let birthDate = emptyFieldValidation("Ingrese la fecha de nacimiento en formado DD/MM/AAAA");
-    let email = emailValidation()
+    let email = emailValidation("Ingrese su correo electrónico")
     let password = passwordValidation()
 
     
@@ -65,23 +64,18 @@ function addUser(){
     } else{
         alert("No se pudo registrar el usuario")
     }
+
+    return Users
 }
 
 
 console.log(Users)
 
 
-// RECORRER UN ARRAY
-
-for(let i = 0; i < Users.length; i++){
-    console.log(Users[i])
-}
 
 
 function menu(){
     let flag = true
-
-
 
     while(flag){
         let menuDesplegable = Number(prompt("Bienvenidos a la vinoteca Vinitus, elija una opción para poder empezar: \n 1-Crear usuario\n 2-Ingresar a la cuenta\n 3-Agregar un producto al carrito\n 4-Eliminar un producto del carrito \n 5-Ir a pagar"))
